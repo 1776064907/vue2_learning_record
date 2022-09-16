@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        总结：
+            一、key的作用
+            1.key是虚拟dom元素的标识，当数据发生改变时，vue会根据【新数据】生成【新的虚拟DOM】，随后vue进行 之前旧的虚拟DOM 与 新的虚拟DOM 的差异比较
+
+            2.在旧虚拟DOM中找到与新虚拟DOM中一致的key,若新的虚拟DOM中内容没有发生变化，则直接使用由旧虚拟DOM转化的真实的DOM，若新的虚拟DOM中内容发生了改变，则生成新的真实DOM，随后替换掉之前的真实DOM
+
+            3.如果在旧虚拟DOM中未找与新虚拟DOM匹配的DOM元素，则直接在页面创建真实DOM
+
+            4.用数据的index作为key值，若对数据进行逆序添加和逆序删除则会产生没必要的真实DOM更新，页面没问题，但是效率低，如果结构中包含输入类的DOM元素，会产生错误的DOM更新,页面会出问题，如果不对数据进行逆序添加或者逆序删除的操作，则可以使用index作为key
+
+            5.最好使用每条数据的唯一标识作为key
+     -->
+</body>
+</html>

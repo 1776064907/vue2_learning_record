@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='../00js/vue.js'></script>
+</head>
+<body>
+    <!-- 
+        总结
+        1.v-if写法
+            1、 v-if="表达式" 表达式的值为 布尔值
+            2、 v-else-if="表达式" 表达式的值为 布尔值
+            3、 v-else 
+            适用于：切换频率低的场景
+            特点：当表达式的值为false时，不展示的DOM元素直接被移除
+            注意：v-if可以和 v-else-if ，v-else 一起使用，但要求结构不能被打断
+
+        2. v-show写法
+            1、v-show="表达式"
+            2、适用于：切换频率较高的场景
+            3、特点：不展示的DOM元素，仅仅只是使用了 display=none样式隐藏了
+
+        3.注意：使用 v-if的时候，元素可能无法获取到，而v-show一定可以会被获取到
+
+        4.template标签只能与v-if一起使用
+     -->
+    <div class="root">
+        <h2>当前n的值为{{n}}</h2>
+        <button @click="n++">点我n++</button>
+
+        <h3 v-show="n === 1">z</h3>
+        <h3 v-show="n === 2">d</h3>
+        <h3 v-show="n === 3">n</h3>
+
+        <h3 v-if="n === 1">a</h3>
+        <p v-else-if="n === 2">b</p>
+        <h4 v-else>c</h4>
+
+        <template v-if="n === 2">
+            <h3>b</h3>
+            <h3>n</h3>
+            <h3>m</h3>
+        </template>
+    </div>
+    <script type='text/javascript'>
+        Vue.config.productionTip = false
+        const vm = new Vue({
+        el:'.root',
+        data: {
+            n:0,
+        }
+        })
+    </script>
+</body>
+</html>

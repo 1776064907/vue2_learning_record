@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='../00js/vue.js'></script>
+    <style>
+        *{
+            padding: 10px;
+        }
+        .demo1{
+            margin-top: 5px;
+            width:300px;
+            height: 50px;
+            background-color: pink;
+        }
+        .demo2{
+            width: 300px;
+            height: 20px;
+            background-color: red;
+        }
+         .demo3{
+            margin-top: 5px;
+            background-color:green;
+        }
+         .demo4{
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+    Vue中的事件修饰符：
+            1.prevent：阻止默认事件（常用）；
+            2.stop：阻止事件冒泡（常用）；
+            3.once：事件只触发一次（常用）；
+            4.capture：使用事件的捕获模式；
+            5.self：只有event.target是当前操作的元素时才触发事件；
+            6.passive：事件的默认行为立即执行，无需等待事件回调执行完毕；
+
+            注意：7.事件修饰符可以连写   @click.stop.prevent
+    -->
+    <div class="root">
+        <!-- 1. prevent 阻止默认行为 -->
+        <a href="http://www.baidu.com" @click.prevent="showinfo">点击我提示信息</a>
+
+        <!-- 2.stop 取消冒泡行为  -->
+        <div class="demo1" v-on:click="showinfo">
+            <div class="demo2" v-on:click.stop="showinfo"></div>
+        </div>
+
+        <!-- 3.once 事件只执行一次 -->
+        <div class="demo1" @click.once="showinfo"></div>
+
+        <!-- 4.comture: 使用事件的捕获阶段 -->
+        <div class="demo3" @click.capture="showinfo(1)">
+            div1
+            <div class="demo4" @click="showinfo(2)">
+                dive2
+            </div>
+        </div>
+
+        <!-- 5.self 只有event.target是当前操作的元素时才触发事件 -->
+        <div class="demo3" @click.self="showinfo(1)">
+            div1
+            <button class="demo4" @click.self="showinfo(2)">
+                dive2
+            </button>
+        </div>
+    </div>
+    <script type='text/javascript'>
+        Vue.config.productionTip = false
+        const vm = new Vue({
+        el:'.root',
+        data: {
+        },
+        methods:{
+            showinfo(e){
+                console.log(e)
+            }
+        }
+        })
+    </script>
+</body>
+</html>

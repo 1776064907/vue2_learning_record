@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .basic {
+            width: 400px;
+            height: 100px;
+            border: 1px solid black;
+        }
+
+        .happy {
+            border: 4px solid red;
+            ;
+            background-color: rgba(255, 255, 0, 0.644);
+            background: linear-gradient(30deg, yellow, pink, orange, yellow);
+        }
+
+        .sad {
+            border: 4px dashed rgb(2, 197, 2);
+            background-color: gray;
+        }
+
+        .normal {
+            background-color: skyblue;
+        }
+
+        .atguigu1 {
+            background-color: yellowgreen;
+        }
+
+        .atguigu2 {
+            font-size: 30px;
+            text-shadow: 2px 2px 10px red;
+        }
+
+        .atguigu3 {
+            border-radius: 20px;
+        }
+    </style>
+    <script src='../00js/vue.js'></script>
+</head>
+
+<body>
+    <!-- 
+        总结：
+        1.class样式
+            写法：class="xxx" xxx可以是 字符串、数组、对象
+                字符串的写法适用于：类名不确认，要动态获取
+                数组写法适用于: 要绑定多个样式，个数不确认，类名也不确认
+                对象写法适用于：要绑定多个样式，个数确定，名字也确认，但是动态确认用不用
+        2.style样式
+            写法： :style="{fontSize: xxx + 'px'}" 其中xxx是动态值
+                  :style="[a,b]"  a,b 都是样式对象
+     -->
+    <div class="root">
+        <!-- 绑定css样式 ，字符串写法 ，适用于：样式的类名不确定，需要动态指定 -->
+        <div class="basic" :class="mood" v-on:click="changemood">test</div><br /><br />
+
+        <!-- 绑定css样式 ，数组写法 ，适用于：要绑定的样式的数量不确定，名字也不确定 -->
+        <div class="basic" :class="classArr" >test</div><br /><br />
+
+        <!-- 绑定css样式 ，对象写法 ，适用于：要绑定的样式的数量确定，名字也确定，需要动态决定用不用 -->
+        <div class="basic" :class="classobj" >test</div><br /><br />
+
+        <!-- 绑定style样式 ，对象写法  -->
+        <div class="basic" :style="styleobj" >test</div><br /><br />
+        <!-- <div class="basic" :style="{color:red}">test</div> -->
+
+        <!-- 绑定style样式 ，数组写法  ,数组内的每一个元素都是对象-->
+        <div class="basic" :style="styleArr" >test</div><br /><br />
+        <div class="basic" :style="[styleobj,{color:red}]" >test</div>
+    </div>
+    <script type='text/javascript'>
+        Vue.config.productionTip = false
+        const vm = new Vue({
+            el: '.root',
+            data: {
+                mood: 'happy',
+                classArr: ['basic', 'happy', 'sad'],
+                classobj: {
+                    atguigu1: true,
+                    atguigu2: true
+                },
+                styleobj:{
+                    fontSize:'40px',
+                    color:'red',
+                   
+                },
+                 red:'blue',
+                styleArr:[
+                    {
+                        backgroundColor:'orange'
+                    },
+                    {
+                        color:'pink'
+                    }
+                ]
+            },
+            methods: {
+                changemood() {
+                    this.mood = 'sad'
+                },
+                change() {
+                    this.styleobj.color = 'red'
+                    
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

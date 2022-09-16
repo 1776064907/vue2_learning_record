@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='../00js/vue.js'></script>
+</head>
+<body>
+    <!-- 
+        总结
+            
+            1.beforeCreate: 无法通过vm访问到data、methods中的数据(此时生命周期，事件，数据代理还未开始)
+            2.create：此时可以通过vm访问到data、methods中的数据(数据监听，数据代理开始)
+            3.beforemount：页面呈现的是为经Vue编译的DOM结构，所有对DOM的操作，最终都是不奏效的
+
+            当vue模板解析完成，虚拟DOM转化为真实DOM插入页面时，执行该函数
+            4.mounted: 页面呈现的是经过Vue编译的DOM，此时对DOM的操作是有效的(尽量避免)
+
+            当data中数据被改变时触发该函数
+            5.beforeUpdate：此时vm中的数据是最新的，但是页面是旧的，未保持同步
+            6.updated：vm中数据和页面数据都是最新，同步的
+
+            当使用了 vm.$destroy()方法时，就调用该函数
+            7.beforedestroy：在进行vm销毁之前，执行的一些 收尾操作
+            8.destroy：在进行vm销毁之后，进行的一些操作
+
+            9.用的最多的是：mounted、beforedestroy
+
+            10.销毁后借助Vue开发者工具看不到任何信息。
+            .销毁后自定义事件会失效，但原生DOM事件依然有效。
+            .一般不会在beforeDestroy操作数据，因为即便操作数据，也不会再触发更新流程了。
+     -->
+    <div class="root">
+        <h2>当前n的值{{n}}</h2>
+        <button @click="add">n++</button>
+    </div>
+    <script type='text/javascript'>
+        Vue.config.productionTip = false
+        const vm = new Vue({
+        el:'.root',
+        data: {
+            n:1,
+        },
+        methods: {
+            add(){
+                this.n++
+            }
+        },
+        beforeCreate() {
+            console.log('beforeCreate')
+        },
+        created(){
+            console.log('created')
+            // console.log(this)
+            // debugger
+        },
+        beforeMount() {
+           
+            console.log('beforeMount')
+        },
+        mounted() {
+             
+            console.log('mounted')
+            
+        },
+        beforeUpdate() {
+            console.log('beforeUpdate')
+            // this.$destroy()
+        },
+        updated() {
+            console.log('updated')
+            
+        },
+        beforeDestroy() {
+            console.log('beforeDestroy')
+            console.log(this)
+            // debugger
+        },
+        })
+    </script>
+</body>
+</html>

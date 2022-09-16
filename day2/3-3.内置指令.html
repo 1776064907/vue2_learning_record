@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='../00js/vue.js'></script>
+</head>
+<body>
+    <!-- 
+        总结：
+            v-text与v-html的区别
+                1.两者都会替换掉元素的内容
+                2，text输入的文本标签不能被html识别
+                3.html输入的文本标签能被html识别
+     -->
+    <div class="root">
+        <div v-text="str"></div>
+        <div v-text="str">阿达</div> 
+        <div v-text="str1">阿达</div> 
+        
+        <div v-html="str2"></div>
+        <div v-html="str2">阿达</div>
+    </div>
+    <script type='text/javascript'>
+        Vue.config.productionTip = false
+        const vm = new Vue({
+        el:'.root',
+        data: {
+            str:'hello',
+            str1:'<h3>how are you</h3>',
+            str2:'<h3>how are you</h3>'
+        }
+        })
+    </script>
+</body>
+</html>

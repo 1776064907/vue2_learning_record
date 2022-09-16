@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='../00js/vue.js'></script>
+</head>
+<body>
+    <!-- 
+        总结：
+            1、使用了v-once指令的DOM元素就是data里的初始值，是静态内容
+            2、改变data里的数据并不会影响有v-once指令的DOM元素
+     -->
+    <div class="root">
+        <h2 v-once>初始值n={{n}}</h2>
+        <h2 >当前的n={{n}}</h2>
+        <button @click="n++">n++</button>
+    </div>
+    <script type='text/javascript'>
+        Vue.config.productionTip = false
+        const vm = new Vue({
+        el:'.root',
+        data: {
+            n:1,
+        }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='../00js/vue.js'></script>
+</head>
+
+<body>
+    <!-- 
+        setter和getter的作用是 监视数据是否发生改变，如果改变则处理相应的函数，并重新解析页面
+        总结：
+            1.Vue会监视data中所有层级的数据
+            2.向data中后追加的属性，Vue默认不会做出页面响应式处理，如果需要后追加的属性做出响应式处理，则需要通过 Vue.set(start,propertyName/index,val)或者vm.$set(start,propertyName/index,val)
+            3.特别注意：Vue.set() 和 vm.$set() 不能给vm 或 data的根数据对象 添加属性！！！
+            4.如果data中的某个属性的值是数组，通过 数组索引来改变数组元素，vue是不会对页面进行解析的 例如： vm._data.arr[0] = value
+            5.实现vue更新数组中数据的方法，只能通过 pop,shift,push,unshift,concat,slice,splice,vm.$set,Vue.set 这个9个方法
+            6.实现数组更新的本质是：调用原生对应的方法来更新数组内的数据，然后重新解析模板，进而解析页面
+     -->
+    <div class="root">
+        <h1>学生信息</h1>
+        <button @click="student.age++">年龄+1岁</button> <br />
+        <button @click="addSex">添加性别属性，默认值：男</button> <br />
+        <button @click="student.sex = '未知' ">修改性别</button> <br />
+        <button @click="addFriend">在列表首位添加一个朋友</button> <br />
+        <button @click="updateFirstName">修改第一个朋友的名字为：张三</button> <br />
+        <button @click="addHoddy">添加一个爱好</button> <br />
+        <button @click="updateHobby">修改第一个爱好为：开车</button> <br />
+        <button @click="filter">过滤掉爱好中的抽烟</button> <br />
+        <h3>姓名：{{student.name}}</h3>
+        <h3>年龄：{{student.age}}</h3>
+        <h3 v-show="student.sex">性别：{{student.sex}}</h3>
+        <h3>爱好：</h3>
+        <ul>
+            <li v-for="(h,index) in student.hobby" :key="index">
+                {{h}}
+            </li>
+        </ul>
+        <h3>朋友们：</h3>
+        <ul>
+            <li v-for="(f,index) in student.friends" :key="index">
+                {{f.name}}--{{f.age}}
+            </li>
+        </ul>
+    </div>
+
+    <script type='text/javascript'>
+        Vue.config.productionTip = false;
+
+        const vm = new Vue({
+            el: '.root',
+            data: {
+                student: {
+                    name: 'tom',
+                    age: 18,
+                    hobby: ['抽烟', '喝酒', '烫头'],
+                    friends: [
+                        { name: 'jerry', age: 35 },
+                        { name: 'tony', age: 36 }
+                    ]
+                }
+            },
+            methods: {
+                addSex(){
+                    // Vue.set(this.student,'sex','男')
+                    this.$set(this.student,'sex','男')
+                },
+                addFriend(){
+                    this.student.friends.unshift({name:'jack',age:70})
+                },
+                updateFirstName(){
+                    this.student.friends[0].name = '张三';
+                },
+                addHoddy(){
+                    this.student.hobby.unshift('打台球')
+                },
+                updateHobby(){
+                    // this.student.hobby.splice(0,1,'开车')
+                    this.$set(this.student.hobby,0,'开车')
+                },
+                filter(){
+                    this.student.hobby = this.student.hobby.filter((h)=>{
+                        return h !== '抽烟'
+                    })
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

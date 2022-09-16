@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='../00js/vue.js'></script>
+    <link rel="stylesheet" href="favicon.ico">
+</head>
+<body>
+    <!-- 
+        MVVM模型
+            1.M:模型(model):data中的数据
+            2.v:视图(view): 模板代码
+            3.VM：视图模型(ViewModel)：Vue实例
+        观察发现：
+            1.data中所有的属性，最后都出现在了VM身上
+            2.vm身上所有的属性及Vue模板中都可以直接使用
+     -->
+    <div class="root">
+        <h1>hello,{{name}}</h1>
+        <h1>你好，{{_c}}</h1>
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        
+        const vm = new Vue({
+        el:'.root',
+        data: {
+            name:'尚硅谷',
+            age:24,
+        }
+        })
+        console.log(vm)
+        
+    </script>
+    
+</body>
+</html>

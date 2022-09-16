@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='../00js/vue.js'></script>
+</head>
+<body>
+    <!-- 
+        总结
+            一、组件名的命名规则
+                可以首字母大写 
+                如果是多个单词 有 - 分开  my-school
+                也可以是 每个单词的首字母大写 如MySchool(必须配合vue脚本架使用，不然会报错)
+
+            二、可以在Vue.extend里配置 name属性 ，让vue开发者工具，显示自己设置的名称
+
+            三、 可以使用<school/>，最好配合 vue脚本架使用，不然多次调用组件只会执行一次
+
+            四、const school = Vue.extend({options}) 可以简写为  const school = {options}
+     -->
+    <div class="root">
+        <my-school></my-school>
+        <!-- <my-school/>
+        <my-school/>
+        <my-school/> -->
+    </div>
+    <script type='text/javascript'>
+        Vue.config.productionTip = false
+
+        // 创建组件的完整写法
+        const school = Vue.extend({
+            template:`
+            <div>
+                <h2>你好啊{{schoolName}}</h2>
+            </div>
+            `,
+            data(){
+                return {
+                    schoolName:'尚硅谷',
+                }
+            }
+        })
+        // 创建组件的简写
+        const s ={
+            name:'atguigu',  // 在vue开发者工具中显示的名字
+             template: `
+            <div>
+                <h2>你好啊{{schoolName}}</h2>
+            </div>
+            `,
+            data() {
+                return {
+                    schoolName: '尚硅谷',
+                }
+            }
+        }
+
+
+        const vm = new Vue({
+        el:'.root',
+        components:{
+            'my-school':s,
+        }
+        })
+    </script>
+</body>
+</html>

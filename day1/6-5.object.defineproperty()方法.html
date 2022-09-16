@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type='text/javascript'>
+        let num = 10;
+        let obj = {
+            name:'zhandge',
+            sex: 'men',
+            
+        }
+        Object.defineProperty(obj,'age',{
+            // value:24,
+            // writable:true,  //是否可更改值
+            // enumerable:true //是否可枚举
+            // configurable:false,  //是否可以删除该值
+
+            // 当有人读取了 age属性时，就会调用get函数， 且返回值就是age的属性值
+            get(){
+                return num
+            },
+
+            // 当有人修改了 age属性值时，就会调用set函数， 且收到的形参就是age的属性值，
+            set(value){
+                num = value;
+            }
+
+        })
+        // delete obj.age   删除一个对象里的属性 
+        obj.age = 20;
+        console.log(obj.age)
+       
+    </script>    
+</body>
+</html>

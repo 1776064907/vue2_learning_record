@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='../00js/vue.js'></script>
+</head>
+<body>
+    <!-- 
+        1.使用v-on:xxx 或 @xxx 绑定事件，其中xxx是事件名；
+        2.事件的回调需要配置在methods对象中，最终会在vm上；
+        3.methods中配置的函数，不要用箭头函数！否则this就不是vm了；
+        4.methods中配置的函数，都是被Vue所管理的函数，this的指向是vm 或 组件实例对象；
+        5.@click="demo" 和 @click="demo($event)" 效果一致，但后者可以传参；
+     -->
+    <div class="root">
+        <button v-on:click="showinfo">点击我提醒！（不传参数）</button>
+        <button @click="showinfo2($event,666)">点击我提醒！！{{name}}（传参数）</button>
+        <h1>{{showinfo()}}</h1>
+    </div>
+
+    <script type='text/javascript'>
+        Vue.config.productionTip = false
+        const vm = new Vue({
+        el:'.root',
+        data: {
+            name:'尚硅谷',
+        },
+        methods:{
+            showinfo(e){
+                console.log(e) // e指向的是事件对象
+                return 666
+            },
+            showinfo2(e,num){
+                console.log(this)  //指向的vue实例
+                console.log(e)
+                alert(num)
+            }
+        }
+        })
+    </script>
+</body>
+</html>
